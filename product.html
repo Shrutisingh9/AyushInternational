@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product — Ayush International</title>
+  <meta name="description" content="View a button from Ayush International. Add to cart, save to wishlist, rate the product and order online.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23A97C3F'/%3E%3Ccircle cx='42' cy='42' r='5' fill='%23fff'/%3E%3Ccircle cx='58' cy='42' r='5' fill='%23fff'/%3E%3Ccircle cx='42' cy='58' r='5' fill='%23fff'/%3E%3Ccircle cx='58' cy='58' r='5' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="products">
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="wordmark">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#A97C3F"/><circle cx="42" cy="42" r="5" fill="#fff"/><circle cx="58" cy="42" r="5" fill="#fff"/><circle cx="42" cy="58" r="5" fill="#fff"/><circle cx="58" cy="58" r="5" fill="#fff"/></svg>
+      <span class="wordmark-text">Ayush International<small>Buttons — import &amp; export</small></span>
+    </a>
+    <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" data-page="home">Home</a></li>
+      <li><a href="who-we-are.html" data-page="who">Who We Are</a></li>
+      <li><a href="products.html" data-page="products">Products</a></li>
+      <li><a href="certifications.html" data-page="certs">Certifications</a></li>
+      <li><a href="how-to-order.html" data-page="how">How to Order</a></li>
+      <li><a href="contact.html" data-page="contact">Contact Us</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="icon-btn" id="wishlistOpen" href="products.html" aria-label="Open wishlist">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7.5-4.6-10-9.3C0.4 8 2 4.5 5.6 4c2-.3 3.8.6 6.4 3 2.6-2.4 4.4-3.3 6.4-3 3.6.5 5.2 4 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg>
+        <span class="count-badge" id="wishCount" hidden>0</span>
+      </a>
+      <a class="icon-btn" id="cartOpen" href="how-to-order.html" aria-label="Open cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1.4" fill="currentColor" stroke="none"/><circle cx="18" cy="21" r="1.4" fill="currentColor" stroke="none"/><path d="M2 3h2l2.6 12.4a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 7H6"/></svg>
+        <span class="count-badge" id="cartCount" hidden>0</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap" id="productDetail"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>Ayush International — Govindpuri, Gali No. 9, Kalkaji, New Delhi – 110019</span>
+    <span>Buttons since 2013</span>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="cartDrawer" aria-label="Shopping cart">
+  <div class="drawer-head"><h2>Your cart</h2><button class="drawer-close" id="cartClose" aria-label="Close cart">&times;</button></div>
+  <div class="drawer-body" id="cartBody"></div>
+  <div class="drawer-foot">
+    <div class="totals-row"><span>Items</span><span id="cartTotalItems">0</span></div>
+    <button class="btn btn-brass" id="checkoutOpen" style="width:100%;justify-content:center;">Send order enquiry</button>
+  </div>
+</aside>
+<aside class="drawer" id="wishDrawer" aria-label="Wishlist">
+  <div class="drawer-head"><h2>Your wishlist</h2><button class="drawer-close" id="wishClose" aria-label="Close wishlist">&times;</button></div>
+  <div class="drawer-body" id="wishBody"></div>
+</aside>
+<div class="modal-overlay" id="checkoutOverlay">
+  <div class="modal">
+    <h2>Send order enquiry</h2>
+    <p class="hint">We confirm pricing by phone or WhatsApp. Share your details and we will reply with rates and dispatch.</p>
+    <form id="checkoutForm">
+      <div class="field"><label for="custName">Your name</label><input id="custName" required></div>
+      <div class="field"><label for="custPhone">Phone number</label><input id="custPhone" required></div>
+      <div class="field"><label for="custAddress">Delivery address / city</label><input id="custAddress"></div>
+      <div class="field"><label for="custNote">Note (quantities, deadline, anything else)</label><textarea id="custNote"></textarea></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" id="checkoutCancel">Cancel</button>
+        <button type="submit" class="btn btn-brass">Send enquiry</button>
+      </div>
+    </form>
+    <div class="order-result" id="orderResult" hidden>
+      <p class="hint" id="orderResultHint"></p>
+      <textarea id="orderMessage" readonly></textarea>
+      <div class="modal-actions" style="margin-top:10px;">
+        <button class="btn btn-outline" id="copyOrder">Copy message</button>
+        <button class="btn btn-outline" id="closeResult">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
