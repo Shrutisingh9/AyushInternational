@@ -27,6 +27,28 @@
     return PRODUCTS.find(function (x) { return x.id === id; });
   }
 
+  function catLabel(id) {
+    const c = CATEGORIES.find(function (x) { return x.id === id; });
+    return c ? c.label : id;
+  }
+
+  function money(n) {
+    return '₹' + Number(n).toLocaleString('en-IN');
+  }
+
+  function priceLabel(p) {
+    if (!p || p.price == null) return '';
+    return money(p.price) + ' <small>' + (p.unit || 'per 100 pcs') + '</small>';
+  }
+
+  function cartValue() {
+    return Object.keys(cart).reduce(function (sum, id) {
+      const p = productById(id);
+      if (!p || !cart[id]) return sum;
+      return sum + (p.price || 0) * cart[id];
+    }, 0);
+  }
+
   function buttonIcon(color, holes) {
     let holesMarkup = '';
     if (holes === 4) holesMarkup = '<circle cx="42" cy="42" r="4"/><circle cx="58" cy="42" r="4"/><circle cx="42" cy="58" r="4"/><circle cx="58" cy="58" r="4"/>';
@@ -93,7 +115,8 @@
       + '</div>'
       + '<div class="card-body">'
       + '<h3><a href="product.html?id=' + p.id + '">' + p.name + '</a></h3>'
-      + '<div class="card-meta">Line ' + p.line + '</div>'
+      + '<div class="card-meta">' + catLabel(p.category) + ' · ' + p.line + '</div>'
+      + '<div class="price">' + priceLabel(p) + '</div>'
       + '<p class="card-blurb">' + p.blurb + '</p>'
       + '<div class="swatch-row">' + p.colors.map(function (c) { return '<span class="swatch-sm" style="background:' + c + '"></span>'; }).join('') + '</div>'
       + '<div class="rating-row">' + starsMarkup(p.id) + '<span class="rating-text" id="rt-' + p.id + '">' + ratingSummary(p.id) + '</span></div>'
@@ -125,6 +148,18 @@
     }).join('');
   }
 
+  function renderSizeChart() {
+    const wrap = document.getElementById('sizeChart');
+    const chart = window.SIZE_CHART || [];
+    if (!wrap || !chart.length) return;
+    wrap.innerHTML = '<div class="section-head"><h2>Master size chart</h2><p>Ligne (L) is the trade size. Use this chart across the catalog instead of repeating millimetres on every card.</p></div>'
+      + '<div class="table-wrap"><table class="size-table"><thead><tr><th>Ligne</th><th>Approx. mm</th><th>Typical use</th></tr></thead><tbody>'
+      + chart.map(function (r) {
+        return '<tr><td>' + r.l + '</td><td>' + r.mm + '</td><td>' + r.use + '</td></tr>';
+      }).join('')
+      + '</tbody></table></div>';
+  }
+
   function updateCounts() {
     const cartCount = Object.values(cart).reduce(function (a, b) { return a + b; }, 0);
     const wishCount = wishlist.length;
@@ -138,6 +173,15 @@
     });
     const totalEl = document.getElementById('cartTotalItems');
     if (totalEl) totalEl.textContent = cartCount;
+    let amt = document.getElementById('cartTotalAmount');
+    if (!amt && totalEl && totalEl.parentElement) {
+      const row = document.createElement('div');
+      row.className = 'totals-row';
+      row.innerHTML = '<span>Est. total</span><strong id="cartTotalAmount">₹0</strong>';
+      totalEl.parentElement.insertAdjacentElement('afterend', row);
+      amt = document.getElementById('cartTotalAmount');
+    }
+    if (amt) amt.textContent = money(cartValue());
   }
 
   function renderCart() {
@@ -153,7 +197,7 @@
       if (!p) return '';
       return '<div class="line-item">'
         + '<div class="li-icon">' + buttonIcon(p.colors[0], p.holes) + '</div>'
-        + '<div class="li-info"><h4><a href="product.html?id=' + p.id + '">' + p.name + '</a></h4><div class="meta">Line ' + p.line + '</div>'
+        + '<div class="li-info"><h4><a href="product.html?id=' + p.id + '">' + p.name + '</a></h4><div class="meta">' + catLabel(p.category) + ' · ' + p.line + ' · ' + money(p.price) + '</div>'
         + '<div class="qty-row">'
         + '<button class="qty-btn" data-action="qtyminus" data-id="' + id + '" aria-label="Decrease quantity">−</button>'
         + '<span class="qty-val">' + cart[id] + '</span>'
@@ -175,7 +219,7 @@
       if (!p) return '';
       return '<div class="wish-item">'
         + '<div class="li-icon">' + buttonIcon(p.colors[0], p.holes) + '</div>'
-        + '<div class="li-info"><h4><a href="product.html?id=' + p.id + '">' + p.name + '</a></h4><div class="meta">Line ' + p.line + '</div>'
+        + '<div class="li-info"><h4><a href="product.html?id=' + p.id + '">' + p.name + '</a></h4><div class="meta">' + catLabel(p.category) + ' · ' + money(p.price) + '</div>'
         + '<div class="wish-actions">'
         + '<button class="btn btn-outline" data-action="movecart" data-id="' + id + '">Add to cart</button>'
         + '<button class="btn btn-outline" data-action="unwish" data-id="' + id + '">Remove</button>'
@@ -240,8 +284,12 @@
     const gst = document.getElementById('gstDisplay');
     const email = document.getElementById('emailDisplay');
     const address = document.getElementById('addressDisplay');
+    const landline = document.getElementById('landlineDisplay');
+    const proprietor = document.getElementById('proprietorDisplay');
     if (address && BIZ.address) address.textContent = BIZ.address;
-    if (phone && BIZ.phone) phone.outerHTML = '<a href="tel:' + BIZ.phone + '">' + BIZ.phone + '</a>';
+    if (proprietor && BIZ.proprietor) proprietor.textContent = BIZ.proprietor;
+    if (landline && BIZ.landline) landline.textContent = BIZ.landline;
+    if (phone && BIZ.phone) phone.outerHTML = '<a href="tel:' + BIZ.phone.replace(/\s/g, '') + '">' + BIZ.phone + '</a>';
     if (wa && BIZ.whatsapp) wa.outerHTML = '<a href="https://wa.me/' + BIZ.whatsapp + '">Chat on WhatsApp</a>';
     if (gst && BIZ.gstin) gst.outerHTML = '<span>' + BIZ.gstin + '</span>';
     if (email && BIZ.email) email.outerHTML = '<a href="mailto:' + BIZ.email + '">' + BIZ.email + '</a>';
@@ -266,21 +314,30 @@
     document.title = p.name + ' — Ayush International';
     const inWishlist = wishlist.indexOf(p.id) !== -1;
     const inCart = !!cart[p.id];
+    const sizes = (p.sizes || []).map(function (s) {
+      return '<span class="size-pill">' + s + '</span>';
+    }).join('');
+    const colorList = (p.colorNames || []).join(', ');
     root.innerHTML =
       '<div class="detail-grid">'
       + '<div class="detail-media">' + mediaInner(p, true) + '</div>'
       + '<div>'
-      + '<p class="crumbs"><a href="index.html">Home</a> / <a href="products.html">Products</a> / ' + p.name + '</p>'
+      + '<p class="crumbs"><a href="index.html">Home</a> / <a href="products.html">Products</a> / ' + catLabel(p.category) + ' / ' + p.name + '</p>'
       + '<h1>' + p.name + '</h1>'
-      + '<div class="card-meta">Line ' + p.line + ' · ' + p.category + '</div>'
+      + '<div class="card-meta">' + catLabel(p.category) + ' · ' + p.line + '</div>'
+      + '<div class="price price-lg">' + priceLabel(p) + '</div>'
       + '<p class="lead" style="margin-top:14px">' + p.blurb + '</p>'
-      + '<p>Available in several sizes (lines) and colours — mainly white and rainbow / multi-colour ranges. Ask for the exact line and shade when you order.</p>'
-      + '<div class="swatch-row" style="margin:12px 0">' + p.colors.map(function (c) { return '<span class="swatch" style="background:' + c + '"></span>'; }).join('') + '</div>'
+      + '<h3 class="detail-sub">Available sizes</h3>'
+      + '<div class="size-row">' + sizes + '</div>'
+      + '<h3 class="detail-sub">Colours &amp; finishes</h3>'
+      + '<p class="color-names">' + colorList + '</p>'
+      + '<div class="swatch-row" style="margin:8px 0 14px">' + p.colors.map(function (c) { return '<span class="swatch" style="background:' + c + '"></span>'; }).join('') + '</div>'
       + '<div class="rating-row">' + starsMarkup(p.id) + '<span class="rating-text" id="rt-' + p.id + '">' + ratingSummary(p.id) + '</span></div>'
       + '<div class="detail-actions">'
       + '<button class="btn btn-brass" data-action="cart" data-id="' + p.id + '">' + (inCart ? 'Add another' : 'Add to cart') + '</button>'
       + '<button class="btn btn-outline" data-action="wish" data-id="' + p.id + '" aria-pressed="' + inWishlist + '">' + (inWishlist ? 'Saved to wishlist' : 'Add to wishlist') + '</button>'
       + '</div>'
+      + '<p class="hint-note">Indicative rate in INR, per 100 pieces. Confirm line, colour and bulk rate when you order.</p>'
       + '</div></div>';
     root.querySelectorAll('img[data-fallback]').forEach(function (img) {
       bindImageFallback(img);
@@ -402,13 +459,15 @@
       const note = document.getElementById('custNote').value.trim();
       const lines = Object.keys(cart).map(function (id) {
         const p = productById(id);
-        return '- ' + p.name + ' (Line ' + p.line + ') x' + cart[id];
-      });
+        if (!p) return '';
+        return '- ' + p.name + ' (' + p.line + ') x' + cart[id] + ' @ ' + money(p.price) + ' ' + (p.unit || '');
+      }).filter(Boolean);
       const message = 'New order enquiry — Ayush International\n\n'
         + 'Name: ' + name + '\n'
         + 'Phone: ' + phone + '\n'
         + (address ? 'Address: ' + address + '\n' : '')
         + '\nItems:\n' + lines.join('\n')
+        + '\n\nEst. total: ' + money(cartValue()) + ' (indicative, per 100 pcs rates)'
         + (note ? '\n\nNote: ' + note : '');
 
       document.getElementById('orderMessage').value = message;
@@ -466,6 +525,7 @@
   markCurrentNav();
   renderFilters();
   renderCatalog();
+  renderSizeChart();
   renderProductPage();
   updateCounts();
   initDrawers();
