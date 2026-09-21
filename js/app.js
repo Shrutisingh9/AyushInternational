@@ -335,10 +335,10 @@
       + '<div class="rating-row">' + starsMarkup(p.id) + '<span class="rating-text" id="rt-' + p.id + '">' + ratingSummary(p.id) + '</span></div>'
       + '<div class="detail-actions">'
       + '<button class="btn btn-brass" data-action="cart" data-id="' + p.id + '">' + (inCart ? 'Add another' : 'Add to cart') + '</button>'
-      + '<button class="btn btn-outline" data-action="wish" data-id="' + p.id + '" aria-pressed="' + inWishlist + '">' + (inWishlist ? 'Saved to wishlist' : 'Add to wishlist') + '</button>'
-      + '</div>'
-      + '<p class="hint-note">Indicative rate in INR, per 100 pieces. Confirm line, colour and bulk rate when you order.</p>'
-      + '</div></div>';
+      + '<button class="btn btn-outline" data-action="wish" data-id="' + p.id + '" aria-pressed="' + inWishlist + '">' + (inWishlist ? 'Saved to wishlist' : 'Add to wishlist') + '</button>';
+      // + '</div>'
+      // + '<p class="hint-note">Indicative rate in INR, per 100 pieces. Confirm line, colour and bulk rate when you order.</p>'
+      // + '</div></div>';
     root.querySelectorAll('img[data-fallback]').forEach(function (img) {
       bindImageFallback(img);
     });

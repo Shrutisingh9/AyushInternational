@@ -13,6 +13,7 @@ window.AYUSH = {
 
 window.CATEGORIES = [
   {id:'all', label:'All buttons'},
+  {id:'shell', label:'Shell / MOP'},
   {id:'polyester', label:'Polyester'},
   {id:'metal', label:'Metal'},
   {id:'laser', label:'Laser'},
@@ -20,8 +21,7 @@ window.CATEGORIES = [
   {id:'fabric', label:'Fabric / Covered'},
   {id:'acrylic', label:'Acrylic'},
   {id:'wood', label:'Wooden'},
-  {id:'horn', label:'Horn'},
-  {id:'shell', label:'Shell / MOP'}
+  {id:'horn', label:'Horn'}
 ];
 
 window.SIZE_CHART = [
@@ -99,40 +99,217 @@ window.SIZE_CHART = [
     }
   };
 
-  var IMAGES = ['images/p1.jpg','images/p2.jpg','images/p3.jpg','images/p4.jpg','images/p5.jpg','images/p6.jpg','images/p7.jpg','images/p8.jpg','images/p9.jpg','images/p10.jpg','images/p11.jpg','images/p12.jpg','images/catalogue.jpg','images/shop.jpg'];
+  // var IMAGES = ['images/Plain Polyster.jpg','images/Dyed Polyseter.jpg','images/Matt Polyster.jpg','images/Shiny Polyster.jpg','images/Marble Polyster.jpg','images/Horn-Look Polyster.jpg','images/Shell-Look Polyster.jpg','images/Wood-Look Polyster.jpg','images/Two-Tone Polyster.jpg','images/Multi-Colour Polyster.jpg','images/Custom Polyster.jpg','images/Brass Buttons.jpg','images/Stainless Steel Buttons.jpg','images/Aluminium Buttons.jpg','images/Zinc Alloy Buttons.jpg','images/Iron Buttons.jpg','images/Copper Buttons.jpg','images/Antique Metal Buttons.jpg','images/Matte Metal Buttons.jpg','images/Shiny Metal Buttons.jpg','images/Oxidized Metal Buttons.jpg','images/Embossed Metal Buttons.jpg','images/Engraved Metal Buttons.jpg','images/Custom Logo Metal Buttons.jpg','images/Laser Printed Buttons.jpg','images/Laser Engraved Buttons.jpg','images/Laser Logo Buttons.jpg','images/Laser Pattern Buttons.jpg','images/Laser Wood Buttons.jpg','images/Laser Acrylic Buttons.jpg','images/Custom Laser Buttons.jpg','images/Embroidered Fabric Buttons.jpg','images/Embroidered Logo Buttons.jpg','images/Thread Embroidery Buttons.jpg','images/Chenille Buttons.jpg','images/Custom Embroidery Buttons.jpg','images/Custom Fabric Buttons.jpg','images/Custom Acrylic Buttons.jpg','images/Custom Wood Buttons.jpg','images/Custom Horn Buttons.jpg','images/Custom Shell Buttons.jpg'];
 
-  function inr(id, min, max) {
-    var h = 0, i;
-    for (i = 0; i < id.length; i++) h = ((h * 33) + id.charCodeAt(i)) >>> 0;
-    var n = min + (h % (max - min + 1));
-    return Math.round(n / 5) * 5;
-  }
+  // function inr(id, min, max) {
+  //   var h = 0, i;
+  //   for (i = 0; i < id.length; i++) h = ((h * 33) + id.charCodeAt(i)) >>> 0;
+  //   var n = min + (h % (max - min + 1));
+  //   return Math.round(n / 5) * 5;
+  // }
 
-  function lineRange(sizes) {
-    return sizes[0] + ' – ' + sizes[sizes.length - 1];
-  }
+  // function lineRange(sizes) {
+  //   return sizes[0] + ' – ' + sizes[sizes.length - 1];
+  // }
 
-  var n = 0;
-  function make(id, name, cat, sizes, holes, min, max, extra, blurb) {
-    var pal = P[cat];
-    n += 1;
-    return {
-      id: id,
-      name: name,
-      category: cat,
-      line: extra && extra.line ? extra.line : lineRange(sizes),
-      sizes: sizes,
-      colorNames: pal.names,
-      colors: pal.hex,
-      holes: holes,
-      price: inr(id, min, max),
-      unit: 'per 100 pcs',
-      image: IMAGES[(n - 1) % IMAGES.length],
-      blurb: blurb
+  // var n = 0;
+  // function make(id, name, cat, sizes, holes, min, max, extra, blurb) {
+  //   var pal = P[cat];
+  //   n += 1;
+  //   return {
+  //     id: id,
+  //     name: name,
+  //     category: cat,
+  //     line: extra && extra.line ? extra.line : lineRange(sizes),
+  //     sizes: sizes,
+  //     colorNames: pal.names,
+  //     colors: pal.hex,
+  //     holes: holes,
+  //     price: inr(id, min, max),
+  //     unit: 'per 100 pcs',
+  //     image: IMAGES[(n - 1) % IMAGES.length],
+  //     blurb: blurb
+  //   };
+  // }
+
+  
+  /* ---------------------------------------------------------------
+     IMAGE MAPPING
+     Har product id ke saamne uski sahi image file ka naam hai.
+     Jin products ke liye alag se photo nahi khichi, unko usi
+     category ke sabse close-matching / "Custom" image de di hai —
+     taki kabhi bhi galat product par galat image na dikhe.
+     Naya image add karna ho: bas neeche filename change/add karo,
+     order se koi fark nahi padega.
+     --------------------------------------------------------------- */
+     var IMAGE_MAP = {
+      
+      // Shell
+      'sh-mop':      'images/MOP Button.jpg',
+      'sh-natural':  'images/Natural Shell.jpg',
+      'sh-effect':   'images/Shell Effect.jpg',      // closest visual match
+      'sh-irid':     'images/Iridescent Shell.jpg',
+      'sh-dyed':     'images/Dyed Shell.jpg',
+      'sh-european':    'images/European Button.jpg',
+    'sh-cufflink':    'images/Cufflink Button.jpg',
+    'sh-laserlogo':   'images/Shell Laser Logo Button.jpg',
+    'sh-abalone':     'images/Abalone Button.jpg',
+    'sh-specialart':  'images/Special Art Button.jpg',
+    'sh-tigershell':  'images/Tiger Shell Button.jpg',
+    'sh-javashell':   'images/Java Shell Button.jpg',
+    'sh-redshell':    'images/Red Shell Button.jpg',
+    'sh-blackmop':    'images/Black MOP Button.jpg',
+    'sh-budha':       'images/Budha Button.jpg',
+    'sh-whitemop':    'images/White MOP Button.jpg',
+    'sh-paua':        'images/Paua Button.jpg',
+    'sh-brownmop':    'images/Brown MOP Button.jpg',
+    'sh-greenmop':    'images/Green MOP Button.jpg',
+    'sh-rivershell':  'images/River Shell Button.jpg',
+    'sh-blackmussel': 'images/Black Mussel Shell Button.jpg',
+    'sh-printed':     'images/Printed Button.jpg',
+    'sh-agoya':       'images/Agoya Shell Button.jpg',
+    'sh-color':       'images/Color Button.jpg',
+    'sh-indianriver': 'images/Indian River Shell Button.jpg',
+
+      // Polyester
+      'poly-plain':     'images/Plain Polyseter.jpg',
+      'poly-dyed':      'images/Dyed Polyseter.jpg',
+      'poly-matt':      'images/Matt Polyseter.jpg',
+      'poly-glossy':    'images/Shiny Polyseter.jpg',
+      'poly-marble':    'images/Marbel Polyester.jpg',
+      'poly-hornlook':  'images/Horn Polyster.jpg',
+      'poly-shelllook': 'images/Shell Polyseter.jpg',
+      'poly-woodlook':  'images/Wood Polyster.jpg',
+      'poly-twotone':   'images/Two Tone Polyster.jpg',
+      'poly-multi':     'images/Multicolor Polyster.jpg',
+      'poly-custom':    'images/Custom Polyster.jpeg',
+   
+      // Metal
+      'met-brass':   'images/Brass Button.jpg',
+      'met-ss':      'images/Stainless Steel Button.jpg',
+      'met-alu':     'images/Aluminum Button.jpg',
+      'met-zinc':    'images/Zinc Alloy Button.jpeg',
+      'met-iron':    'images/Iron Button.jpg',
+      'met-copper':  'images/Copper Button.jpg',
+      'met-antique': 'images/Antique Metal Button.jpg',
+      'met-matte':   'images/Mate Metal Button.jpg',
+      'met-shiny':   'images/Polished Button.jpg',
+      'met-oxi':     'images/Oxidised Metal.jpg',
+      'met-emboss':  'images/Emboshed Metal.jpg',
+      'met-engrave': 'images/Engraved Metal.jpg',
+      'met-logo':    'images/Custome logo Metal.jpg',
+   
+      // Laser
+      'las-print':   'images/Laser Printed Button.jpg',
+      'las-engrave': 'images/Laser Engraved Button.jpeg',
+      'las-logo':    'images/Laser Logo Button.jpg',
+      'las-pattern': 'images/Laser Pattern Button.jpg',
+      'las-wood':    'images/Laser Wood Button.jpg',
+      'las-acrylic': 'images/Laser Acrylic Button.jpg',
+      'las-custom':  'images/Custome Laser Button.jpg',
+   
+      // Embroidery
+      'emb-fabric':   'images/Embroidery Fabric Button.jpg',
+      // 'emb-logo':     'images/Embroidered Logo Buttons.jpg',
+      'emb-thread':   'images/Thread Embroidery Button.jpg',
+      'emb-chenille': 'images/Chenille Button.jpg',
+      // 'emb-applique': 'images/Embroidered Logo Buttons.jpg', // no dedicated photo yet
+      'emb-custom':   'images/Custome Embroidery Button.jpg',
+   
+      // Fabric / Covered — no dedicated photos yet, sab "Custom Fabric" use karenge
+      'fab-covered': 'images/Custom Fabric Buttons.jpg',
+      'fab-cotton':  'images/Custom Fabric Buttons.jpg',
+      'fab-linen':   'images/Custom Fabric Buttons.jpg',
+      'fab-velvet':  'images/Custom Fabric Buttons.jpg',
+      'fab-satin':   'images/Custom Fabric Buttons.jpg',
+      'fab-denim':   'images/Custom Fabric Buttons.jpg',
+      'fab-printed': 'images/Custom Fabric Buttons.jpg',
+      'fab-pattern': 'images/Custom Fabric Buttons.jpg',
+      'fab-custom':  'images/Custom Fabric Buttons.jpg',
+   
+      // Acrylic
+      'acr-clear':    'images/Custom Acrylic Buttons.jpg',
+      'acr-trans':    'images/Custom Acrylic Buttons.jpg',
+      'acr-colored':  'images/Custom Acrylic Buttons.jpg',
+      'acr-printed':  'images/Custom Acrylic Buttons.jpg',
+      'acr-glitter':  'images/Custom Acrylic Buttons.jpg',
+      'acr-frosted':  'images/Custom Acrylic Buttons.jpg',
+      'acr-mirror':   'images/Custom Acrylic Buttons.jpg',
+      'acr-laser':    'images/Laser Acrylic Buttons.jpg',   // matches "laser cut" better
+      'acr-custom':   'images/Custom Acrylic Buttons.jpg',
+   
+      // Wood
+      'wd-natural':  'images/Natural Wood.jpg',
+      'wd-painted':  'images/Custom Wood Buttons.jpg',
+      'wd-printed':  'images/Custom Wood Buttons.jpg',
+      'wd-engraved': 'images/laser engraved.jpg',       // matches "laser engraved" better
+      'wd-burnt':    'images/Custom Wood Buttons.jpg',
+      'wd-bamboo':   'images/Custom Wood Buttons.jpg',
+      'wd-coconut':  'images/Coconut Shell Button.jpg',
+      'wd-custom':   'images/Custom Wood Buttons.jpg',
+   
+      // Horn
+      'hn-natural':  'images/Custom Horn Buttons.jpg',
+      'hn-look':     'images/Horn-Look Polyster.jpg',       // closest visual match
+      'hn-tortoise': 'images/Custom Horn Buttons.jpg'
     };
-  }
+   
+    var FALLBACK_IMAGE = 'images/Custom Polyster.jpg';
+   
+    function inr(id, min, max) {
+      var h = 0, i;
+      for (i = 0; i < id.length; i++) h = ((h * 33) + id.charCodeAt(i)) >>> 0;
+      var n = min + (h % (max - min + 1));
+      return Math.round(n / 5) * 5;
+    }
+   
+    function lineRange(sizes) {
+      return sizes[0] + ' – ' + sizes[sizes.length - 1];
+    }
+   
+    function make(id, name, cat, sizes, holes, min, max, extra, blurb) {
+      var pal = P[cat];
+      return {
+        id: id,
+        name: name,
+        category: cat,
+        line: extra && extra.line ? extra.line : lineRange(sizes),
+        sizes: sizes,
+        colorNames: pal.names,
+        colors: pal.hex,
+        holes: holes,
+        image: IMAGE_MAP[id] || FALLBACK_IMAGE,
+        blurb: blurb
+      };
+    }
 
   window.PRODUCTS = [
+    make('sh-mop', 'Mother of Pearl', 'shell', S.full, 4, 420, 860, null, 'Real M.O.P. — pearl white, iridescent and formal shirt lines.'),
+    make('sh-natural', 'Natural Shell', 'shell', S.full, 2, 360, 740, null, 'Natural seep / sea-shell with grain. Sold by the line.'),
+    make('sh-effect', 'Shell Effect', 'shell', S.garment, 4, 140, 280, null, 'Shell-effect polyester / acrylic when real shell is not required.'),
+    make('sh-irid', 'Iridescent Shell', 'shell', S.full, 2, 400, 820, null, 'Iridescent pearl, silver, pink, blue and rainbow faces.'),
+    make('sh-dyed', 'Dyed Shell', 'shell', S.full, 4, 380, 780, null, 'Dyed shell — navy, green, maroon, black and fashion shades.'),
+    make('sh-european', 'European Buttons', 'shell', S.full, 4, 380, 760, null, 'European-style fashion shell buttons for jackets and coats.'),
+    make('sh-cufflink', 'Cufflink Buttons', 'shell', S.garment, 0, 450, 900, null, 'Shell cufflink-style buttons for formal shirts, no holes.'),
+    make('sh-laserlogo', 'Laser Logo Buttons', 'shell', S.garment, 2, 420, 820, null, 'Shell buttons with a laser-etched brand logo.'),
+    make('sh-abalone', 'Abalone Buttons', 'shell', S.full, 4, 480, 940, null, 'Abalone shell buttons with vivid natural iridescence.'),
+    make('sh-specialart', 'Special Art Buttons', 'shell', S.garment, 2, 400, 800, null, 'Hand-finished decorative art shell buttons.'),
+    make('sh-tigershell', 'Tiger Shell Buttons', 'shell', S.full, 4, 400, 780, null, 'Tiger cowrie-pattern shell buttons.'),
+    make('sh-javashell', 'Java Shell Buttons', 'shell', S.full, 4, 360, 720, null, 'Java shell buttons with natural grain variation.'),
+    make('sh-redshell', 'Red Shell Buttons', 'shell', S.full, 4, 380, 760, null, 'Dyed red shell buttons for festive and fashion wear.'),
+    make('sh-blackmop', 'Black MOP Buttons', 'shell', S.full, 4, 420, 860, null, 'Black mother-of-pearl buttons for formalwear and jackets.'),
+    make('sh-budha', 'Budha Buttons', 'shell', S.full, 4, 360, 720, null, 'Budha shell buttons, a classic trade-shell finish.'),
+    make('sh-whitemop', 'White MOP Buttons', 'shell', S.full, 4, 420, 860, null, 'Classic white mother-of-pearl for formal shirts.'),
+    make('sh-paua', 'Paua Buttons', 'shell', S.full, 4, 460, 920, null, 'Paua shell buttons with deep blue-green iridescence.'),
+    make('sh-brownmop', 'Brown MOP Buttons', 'shell', S.full, 4, 400, 800, null, 'Brown mother-of-pearl for earthy, natural looks.'),
+    make('sh-greenmop', 'Green MOP Buttons', 'shell', S.full, 4, 420, 840, null, 'Green mother-of-pearl for fashion outerwear.'),
+    make('sh-rivershell', 'River Shell Buttons', 'shell', S.full, 4, 340, 680, null, 'Freshwater river shell buttons, light and natural.'),
+    make('sh-blackmussel', 'Black Mussel Shell Buttons', 'shell', S.full, 4, 360, 720, null, 'Black mussel shell buttons with a dark natural sheen.'),
+    make('sh-printed', 'Printed Buttons', 'shell', S.garment, 4, 300, 600, null, 'Printed motifs on a shell base.'),
+    make('sh-agoya', 'Agoya Shell Buttons', 'shell', S.full, 4, 440, 880, null, 'Agoya (Akoya) pearl-shell buttons with a fine lustre.'),
+    make('sh-color', 'Color Buttons', 'shell', S.garment, 4, 320, 640, null, 'Dyed, colour-finished shell buttons.'),
+    make('sh-indianriver', 'Indian River Shell Buttons', 'shell', S.full, 4, 340, 680, null, 'Indian river shell buttons, a domestic natural-shell option.'),
+
     make('poly-plain', 'Plain Polyester', 'polyester', S.full, 4, 70, 140, null, 'Everyday plain polyester — shirts, uniforms and bulk garment runs. Common sizes 14L–36L.'),
     make('poly-dyed', 'Dyed Polyester', 'polyester', S.full, 4, 80, 155, null, 'Solution-dyed polyester in basic, red, blue, green, yellow and purple families.'),
     make('poly-matt', 'Matt Polyester', 'polyester', S.full, 4, 85, 160, null, 'Low-sheen matt polyester for formalwear and uniforms.'),
@@ -168,10 +345,10 @@ window.SIZE_CHART = [
     make('las-custom', 'Custom Laser Buttons', 'laser', S.laser, 4, 260, 520, null, 'Custom laser size, colour and artwork. Sample first on bulk orders.'),
 
     make('emb-fabric', 'Embroidered Fabric Buttons', 'embroidery', S.embroider, 0, 280, 520, null, 'Fabric buttons with thread embroidery on the face.'),
-    make('emb-logo', 'Embroidered Logo Buttons', 'embroidery', S.embroider, 0, 320, 620, null, 'Logo embroidery — single, two-colour or metallic thread.'),
+    // make('emb-logo', 'Embroidered Logo Buttons', 'embroidery', S.embroider, 0, 320, 620, null, 'Logo embroidery — single, two-colour or metallic thread.'),
     make('emb-thread', 'Thread Embroidery Buttons', 'embroidery', S.embroider, 0, 270, 500, null, 'Decorative thread work. Contrast and gradient thread available.'),
     make('emb-chenille', 'Chenille Buttons', 'embroidery', S.embroider, 0, 340, 640, null, 'Chenille-texture embroidered buttons for fashion and kidswear.'),
-    make('emb-applique', 'Appliqué Buttons', 'embroidery', S.embroider, 0, 300, 580, null, 'Appliqué fabric buttons with stitched overlay.'),
+    // make('emb-applique', 'Appliqué Buttons', 'embroidery', S.embroider, 0, 300, 580, null, 'Appliqué fabric buttons with stitched overlay.'),
     make('emb-custom', 'Custom Embroidery Buttons', 'embroidery', S.embroider, 0, 360, 720, null, 'Custom stitch count, thread colours and size.'),
 
     make('fab-covered', 'Fabric Covered Buttons', 'fabric', S.fabric, 0, 160, 320, null, 'Classic covered buttons. Almost any fabric colour can be produced.'),
@@ -205,13 +382,6 @@ window.SIZE_CHART = [
 
     make('hn-natural', 'Natural Horn', 'horn', S.horn, 2, 380, 720, null, 'Natural horn mix — cream through dark brown. No two pieces match exactly.'),
     make('hn-look', 'Horn-Look', 'horn', S.horn, 4, 160, 320, null, 'Horn-effect (polyester / resin) in light, dark and multi-tone.'),
-    make('hn-tortoise', 'Tortoise / Amber Horn-Look', 'horn', S.horn, 4, 180, 360, null, 'Tortoise, amber and caramel horn-look for coats and fashion.'),
-
-    make('sh-mop', 'Mother of Pearl', 'shell', S.full, 4, 420, 860, null, 'Real M.O.P. — pearl white, iridescent and formal shirt lines.'),
-    make('sh-natural', 'Natural Shell', 'shell', S.full, 2, 360, 740, null, 'Natural seep / sea-shell with grain. Sold by the line.'),
-    make('sh-effect', 'Shell Effect', 'shell', S.garment, 4, 140, 280, null, 'Shell-effect polyester / acrylic when real shell is not required.'),
-    make('sh-irid', 'Iridescent Shell', 'shell', S.full, 2, 400, 820, null, 'Iridescent pearl, silver, pink, blue and rainbow faces.'),
-    make('sh-dyed', 'Dyed Shell', 'shell', S.full, 4, 380, 780, null, 'Dyed shell — navy, green, maroon, black and fashion shades.'),
-    make('sh-engraved', 'Engraved Shell', 'shell', S.garment, 2, 450, 920, null, 'Engraved and printed shell. Custom motifs on request.')
+    make('hn-tortoise', 'Tortoise / Amber Horn-Look', 'horn', S.horn, 4, 180, 360, null, 'Tortoise, amber and caramel horn-look for coats and fashion.')
   ];
 })();
