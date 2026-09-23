@@ -336,9 +336,9 @@
       + '<div class="detail-actions">'
       + '<button class="btn btn-brass" data-action="cart" data-id="' + p.id + '">' + (inCart ? 'Add another' : 'Add to cart') + '</button>'
       + '<button class="btn btn-outline" data-action="wish" data-id="' + p.id + '" aria-pressed="' + inWishlist + '">' + (inWishlist ? 'Saved to wishlist' : 'Add to wishlist') + '</button>';
-      // + '</div>'
-      // + '<p class="hint-note">Indicative rate in INR, per 100 pieces. Confirm line, colour and bulk rate when you order.</p>'
-      // + '</div></div>';
+      + '</div>'
+      + '<p class="hint-note">Indicative rate in INR, per 100 pieces. Confirm line, colour and bulk rate when you order.</p>'
+      + '</div></div>';
     root.querySelectorAll('img[data-fallback]').forEach(function (img) {
       bindImageFallback(img);
     });
@@ -490,6 +490,93 @@
     });
   }
 
+  function initEnquiryForm() {
+    const form = document.getElementById('enquiryForm');
+    const result = document.getElementById('enquiryResult');
+    if (!form || !result) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const product = document.getElementById('enqProduct').value.trim();
+      const name = document.getElementById('enqName').value.trim();
+      const email = document.getElementById('enqEmail').value.trim();
+      const mobile = document.getElementById('enqMobile').value.trim();
+      const details = document.getElementById('enqDetails').value.trim();
+
+      const message = 'New enquiry — Ayush International\n\n'
+        + 'Product / service: ' + product + '\n'
+        + 'Name: ' + name + '\n'
+        + 'Email: ' + email + '\n'
+        + 'Mobile: ' + mobile + '\n'
+        + '\nDetails:\n' + details;
+
+      document.getElementById('enquiryMessage').value = message;
+      form.hidden = true;
+      result.hidden = false;
+
+      if (BIZ.whatsapp) {
+        window.open('https://wa.me/' + BIZ.whatsapp + '?text=' + encodeURIComponent(message), '_blank');
+        document.getElementById('enquiryResultHint').textContent = 'Your enquiry has been opened in WhatsApp — just hit send.';
+      } else {
+        document.getElementById('enquiryResultHint').textContent = 'WhatsApp is not set up yet. Copy this message and send it to the shop, or call once the number is added.';
+      }
+    });
+
+    const copyEnquiry = document.getElementById('copyEnquiry');
+    if (copyEnquiry) copyEnquiry.addEventListener('click', function () {
+      const ta = document.getElementById('enquiryMessage');
+      ta.select();
+      document.execCommand('copy');
+    });
+  }
+
+  function initGallery() {
+    const track = document.getElementById('galleryTrack');
+    const prev = document.getElementById('galleryPrev');
+    const next = document.getElementById('galleryNext');
+    if (!track || !prev || !next) return;
+    const viewport = track.closest('.gallery-viewport');
+    const slides = track.children;
+    let index = 0;
+    let timer = null;
+
+    function update() {
+      const slide = slides[0];
+      if (!slide) return;
+      const slideWidth = slide.getBoundingClientRect().width;
+      track.style.transform = 'translateX(-' + (index * slideWidth) + 'px)';
+    }
+
+    function goTo(i) {
+      index = (i + slides.length) % slides.length;
+      update();
+    }
+
+    function startAuto() {
+      stopAuto();
+      timer = setInterval(function () { goTo(index + 1); }, 1500);
+    }
+    function stopAuto() {
+      if (timer) clearInterval(timer);
+      timer = null;
+    }
+
+    next.addEventListener('click', function () { goTo(index + 1); startAuto(); });
+    prev.addEventListener('click', function () { goTo(index - 1); startAuto(); });
+    if (viewport) {
+      viewport.addEventListener('mouseenter', stopAuto);
+      viewport.addEventListener('mouseleave', startAuto);
+    }
+    window.addEventListener('resize', update);
+
+    update();
+    startAuto();
+
+    track.querySelectorAll('img[data-fallback]').forEach(function (img) {
+      bindImageFallback(img);
+    });
+  }
+
   function initMenu() {
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
@@ -497,6 +584,23 @@
     menuToggle.addEventListener('click', function () {
       const open = navLinks.classList.toggle('open');
       menuToggle.setAttribute('aria-expanded', open);
+    });
+  }
+
+  function initProductsDropdown() {
+    const dropToggle = document.getElementById('dropdownToggle');
+    const dropItem = document.getElementById('productsNavItem');
+    if (!dropToggle || !dropItem) return;
+    dropToggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      const isOpen = dropItem.classList.toggle('open');
+      dropToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    document.addEventListener('click', function (e) {
+      if (!dropItem.contains(e.target)) {
+        dropItem.classList.remove('open');
+        dropToggle.setAttribute('aria-expanded', 'false');
+      }
     });
   }
 
@@ -530,5 +634,11 @@
   updateCounts();
   initDrawers();
   initCheckout();
+  initEnquiryForm();
   initMenu();
+  initProductsDropdown();
+  initGallery();
+
+  const fy = document.getElementById('footYear');
+  if (fy) fy.textContent = new Date().getFullYear();
 })();

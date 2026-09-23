@@ -25,12 +25,28 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html" data-page="home">Home</a></li>
       <li><a href="who-we-are.html" data-page="who">Who We Are</a></li>
-      <li><a href="products.html" data-page="products">Products</a></li>
+      <li class="nav-item has-dropdown" id="productsNavItem">
+        <a href="products.html" data-page="products">Products</a>
+        <button class="dropdown-toggle" id="dropdownToggle" aria-label="Show product categories" aria-expanded="false">
+          <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="products.html?cat=polyester">Polyester</a></li>
+          <li><a href="products.html?cat=metal">Metal</a></li>
+          <li><a href="products.html?cat=laser">Laser</a></li>
+          <li><a href="products.html?cat=embroidery">Embroidery</a></li>
+          <li><a href="products.html?cat=fabric">Fabric / Covered</a></li>
+          <li><a href="products.html?cat=acrylic">Acrylic</a></li>
+          <li><a href="products.html?cat=wood">Wooden</a></li>
+          <li><a href="products.html?cat=horn">Horn</a></li>
+          <li><a href="products.html?cat=shell">Shell / M.O.P.</a></li>
+        </ul>
+      </li>
       <li><a href="certifications.html" data-page="certs">Certifications</a></li>
       <li><a href="how-to-order.html" data-page="how">How to Order</a></li>
       <li><a href="contact.html" data-page="contact">Contact Us</a></li>
     </ul>
-    <div class="nav-actions">
+    <!-- <div class="nav-actions">
       <a class="icon-btn" id="wishlistOpen" href="products.html" aria-label="Open wishlist">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7.5-4.6-10-9.3C0.4 8 2 4.5 5.6 4c2-.3 3.8.6 6.4 3 2.6-2.4 4.4-3.3 6.4-3 3.6.5 5.2 4 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg>
         <span class="count-badge" id="wishCount" hidden>0</span>
@@ -39,7 +55,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1.4" fill="currentColor" stroke="none"/><circle cx="18" cy="21" r="1.4" fill="currentColor" stroke="none"/><path d="M2 3h2l2.6 12.4a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 7H6"/></svg>
         <span class="count-badge" id="cartCount" hidden>0</span>
       </a>
-    </div>
+    </div> -->
   </div>
 </header>
 
@@ -54,30 +70,155 @@
 
   <section>
     <div class="wrap">
-      <div class="contact-box">
-        <div class="contact-grid">
-          <div class="contact-item"><b>Proprietor</b><span id="proprietorDisplay">Munna Singh</span></div>
-          <div class="contact-item"><b>Address</b><span id="addressDisplay">1041, Govindpuri Gali No. 9, Kalkaji, New Delhi – 110019</span></div>
-          <div class="contact-item"><b>Mobile / WhatsApp</b><span class="fill-me" id="phoneDisplay">To be added</span></div>
-          <div class="contact-item"><b>WhatsApp</b><span class="fill-me" id="whatsappDisplay">To be added</span></div>
-          <div class="contact-item"><b>Landline</b><span id="landlineDisplay">+91-11-26429905, +91-11-26429913</span></div>
-          <div class="contact-item"><b>Email</b><span class="fill-me" id="emailDisplay">To be added</span></div>
-          <div class="contact-item"><b>GSTIN</b><span class="fill-me" id="gstDisplay">To be added</span></div>
-          <div class="contact-item"><b>Hours</b><span class="fill-me">To be added</span></div>
+      <div class="contact-page-grid">
+
+        <div class="contact-box">
+          <ul class="contact-detail-list">
+            <li>
+              <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg></span>
+              <div><b>Proprietor</b><span id="proprietorDisplay">Munna Singh</span></div>
+            </li>
+            <li>
+              <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+              <div><b>Address</b><span id="addressDisplay">1041, Govindpuri Gali No. 9, Kalkaji, New Delhi – 110019</span></div>
+            </li>
+            <li>
+              <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
+              <div><b>Mobile / WhatsApp</b><span class="fill-me" id="phoneDisplay">To be added</span></div>
+            </li>
+            <li>
+              <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+              <div><b>WhatsApp</b><span class="fill-me" id="whatsappDisplay">To be added</span></div>
+            </li>
+            <li>
+              <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8.1 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg></span>
+              <div><b>Landline</b><span id="landlineDisplay">+91-11-26429905, +91-11-26429913</span></div>
+            </li>
+            <li>
+              <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg></span>
+              <div><b>Email</b><span class="fill-me" id="emailDisplay">To be added</span></div>
+            </li>
+            <li>
+              <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2h6l1 4h3v14H5V6h3z"/><path d="M9 11h6M9 15h6"/></svg></span>
+              <div><b>GSTIN</b><span class="fill-me" id="gstDisplay">To be added</span></div>
+            </li>
+            <li>
+              <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
+              <div><b>Hours</b><span class="fill-me">To be added</span></div>
+            </li>
+          </ul>
+          <figure class="visiting-card">
+            <img src="images/visiting-card.png" alt="Ayush International visiting card — Munna Singh">
+            <figcaption class="caption">Visiting card</figcaption>
+          </figure>
         </div>
-        <figure class="visiting-card">
-          <img src="images/visiting-card.png" alt="Ayush International visiting card — Munna Singh">
-          <figcaption class="caption">Visiting card</figcaption>
-        </figure>
+
+        <div class="enquiry-box">
+          <h2>Send an enquiry</h2>
+          <p class="hint">Share what you're looking for and we'll get back with pricing and availability.</p>
+          <form id="enquiryForm">
+            <div class="field">
+              <label for="enqProduct">Product / service looking for</label>
+              <input id="enqProduct" placeholder="e.g. Shell buttons, 24L, white" required>
+            </div>
+            <div class="field">
+              <label for="enqName">Your name</label>
+              <input id="enqName" placeholder="Your name" required>
+            </div>
+            <div class="field">
+              <label for="enqEmail">Email</label>
+              <input id="enqEmail" type="email" placeholder="you@example.com" required>
+            </div>
+            <div class="field">
+              <label for="enqMobile">Mobile</label>
+              <input id="enqMobile" type="tel" placeholder="10-digit mobile number" required>
+            </div>
+            <div class="field">
+              <label for="enqDetails">Enquiry details</label>
+              <textarea id="enqDetails" placeholder="Your requirement — quantity, line, colour, deadline" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-brass" style="width:100%;justify-content:center;">Submit enquiry</button>
+          </form>
+          <div class="order-result" id="enquiryResult" hidden>
+            <p class="hint" id="enquiryResultHint"></p>
+            <textarea id="enquiryMessage" readonly></textarea>
+            <div class="modal-actions" style="margin-top:10px;">
+              <button class="btn btn-outline" id="copyEnquiry">Copy message</button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap foot-row">
-    <span>Ayush International — 1041, Govindpuri Gali No. 9, Kalkaji, New Delhi – 110019</span>
-    <span>Buttons since 2007</span>
+  <div class="wrap footer-grid">
+
+    <div class="footer-col footer-brand">
+      <a href="index.html" class="footer-wordmark">
+        <img src="images/logo.png" alt="Ayush International" width="34" height="34">
+        <span>Ayush International</span>
+      </a>
+      <p>Importer and exporter of plastic, shell, mother-of-pearl, fancy and shirt buttons — supplying manufacturers, exporters, retailers and individual buyers since 2013.</p>
+      <a href="who-we-are.html" class="footer-more">Read more &rarr;</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="who-we-are.html">Who We Are</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="certifications.html">Certifications</a></li>
+        <li><a href="how-to-order.html">How to Order</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Our Products</h4>
+      <ul class="footer-links">
+        <li><a href="products.html?cat=shell">Shell / M.O.P. Buttons</a></li>
+        <li><a href="products.html?cat=polyester">Polyester Buttons</a></li>
+        <li><a href="products.html?cat=metal">Metal Buttons</a></li>
+        <li><a href="products.html?cat=laser">Laser Buttons</a></li>
+        <li><a href="products.html?cat=embroidery">Embroidery Buttons</a></li>
+        <li><a href="products.html?cat=fabric">Fabric / Covered Buttons</a></li>
+        <li><a href="products.html?cat=acrylic">Acrylic Buttons</a></li>
+        <li><a href="products.html?cat=wood">Wooden Buttons</a></li>
+        <li><a href="products.html?cat=horn">Horn Buttons</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Location</h4>
+      <ul class="footer-contact">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <a href="https://maps.google.com/?q=1041,+Govindpuri+Gali+No.+9,+Kalkaji,+New+Delhi+110019" target="_blank" rel="noopener">1041, Govindpuri, Gali No. 9, Kalkaji, New Delhi – 110019</a>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8.1 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg>
+          <a href="tel:+919818684074">+91 98186 84074</a>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <a href="https://wa.me/919818684074" target="_blank" rel="noopener">WhatsApp us</a>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>
+          <a href="mailto:ayushinternational2008@gmail.com">ayushinternational2008@gmail.com</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="wrap footer-bottom">
+    <span>&copy; <span id="footYear"></span> Ayush International</span>
+    <span>Buttons — import &amp; export, since 2007</span>
   </div>
 </footer>
 
