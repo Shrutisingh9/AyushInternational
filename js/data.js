@@ -216,41 +216,34 @@ window.SIZE_CHART = [
       'emb-custom':   'images/Custome Embroidery Button.jpg',
    
       // Fabric / Covered — no dedicated photos yet, sab "Custom Fabric" use karenge
-      'fab-covered': 'images/Custom Fabric Buttons.jpg',
-      'fab-cotton':  'images/Custom Fabric Buttons.jpg',
-      'fab-linen':   'images/Custom Fabric Buttons.jpg',
-      'fab-velvet':  'images/Custom Fabric Buttons.jpg',
-      'fab-satin':   'images/Custom Fabric Buttons.jpg',
-      'fab-denim':   'images/Custom Fabric Buttons.jpg',
-      'fab-printed': 'images/Custom Fabric Buttons.jpg',
-      'fab-pattern': 'images/Custom Fabric Buttons.jpg',
-      'fab-custom':  'images/Custom Fabric Buttons.jpg',
+      'fab-covered': 'images/Fabric Covered Button.jpg',
+      'fab-cotton':  'images/Cotton Fabric Button.jpg',
+      'fab-linen':   'images/Linen Button.jpg',
+      'fab-velvet':  'images/Velvet Button.jpg',
+      'fab-satin':   'images/Satin Button.jpg',
+      'fab-denim':   'images/Denim Button.jpg',
+      'fab-printed': 'images/Printed Fabric Button.jpg',
+      'fab-custom':  'images/Custome Covered Button.jpg',
    
       // Acrylic
-      'acr-clear':    'images/Custom Acrylic Buttons.jpg',
-      'acr-trans':    'images/Custom Acrylic Buttons.jpg',
-      'acr-colored':  'images/Custom Acrylic Buttons.jpg',
-      'acr-printed':  'images/Custom Acrylic Buttons.jpg',
-      'acr-glitter':  'images/Custom Acrylic Buttons.jpg',
-      'acr-frosted':  'images/Custom Acrylic Buttons.jpg',
-      'acr-mirror':   'images/Custom Acrylic Buttons.jpg',
-      'acr-laser':    'images/Laser Acrylic Buttons.jpg',   // matches "laser cut" better
-      'acr-custom':   'images/Custom Acrylic Buttons.jpg',
+      'acr-clear':    'images/Clear Acrylic Button.jpg',
+      'acr-trans':    'images/Transparent Acrylic Button.jpg',
+      'acr-colored':  'images/Color Acrylic Button.jpg',
+      'acr-printed':  'images/printed Acrylic Button.jpg',
+      'acr-glitter':  'images/Glitter Acrylic Button.jpg',
+      'acr-frosted':  'images/Frosted Acrylic Button.jpg',
+      'acr-mirror':   'images/Mirror Acrylic Button.jpg',
    
       // Wood
       'wd-natural':  'images/Natural Wood.jpg',
-      'wd-painted':  'images/Custom Wood Buttons.jpg',
-      'wd-printed':  'images/Custom Wood Buttons.jpg',
       'wd-engraved': 'images/laser engraved.jpg',       // matches "laser engraved" better
-      'wd-burnt':    'images/Custom Wood Buttons.jpg',
-      'wd-bamboo':   'images/Custom Wood Buttons.jpg',
       'wd-coconut':  'images/Coconut Shell Button.jpg',
-      'wd-custom':   'images/Custom Wood Buttons.jpg',
+      'wd-custom':   'images/Custom Wood Button.jpg',
    
       // Horn
-      'hn-natural':  'images/Custom Horn Buttons.jpg',
-      'hn-look':     'images/Horn-Look Polyster.jpg',       // closest visual match
-      'hn-tortoise': 'images/Custom Horn Buttons.jpg'
+      'hn-natural':  'images/Natural Horn Button.jpg',
+      'hn-look':     'images/Horn Look Button.jpg',       // closest visual match
+      'hn-tortoise': 'images/Amber Horn Button.jpg'
     };
    
     var FALLBACK_IMAGE = 'images/Custom Polyster.jpg';
@@ -356,7 +349,6 @@ window.SIZE_CHART = [
     make('fab-satin', 'Satin Buttons', 'fabric', S.fabric, 0, 200, 390, null, 'Satin-covered with a dress-fabric sheen.'),
     make('fab-denim', 'Denim Buttons', 'fabric', S.fabric, 0, 180, 360, null, 'Denim-covered and jeans-style covered buttons.'),
     make('fab-printed', 'Printed Fabric Buttons', 'fabric', S.fabric, 0, 190, 380, null, 'Printed cotton / polyester fabric covers.'),
-    make('fab-pattern', 'Patterned Fabric Buttons', 'fabric', S.fabric, 0, 200, 400, null, 'Jacquard, brocade and patterned covers.'),
     make('fab-custom', 'Custom Covered Buttons', 'fabric', S.fabric, 0, 240, 480, null, 'Send fabric or specify mill shade. Custom size including 70L and 80L.'),
 
     make('acr-clear', 'Clear Acrylic', 'acrylic', S.acrylic, 4, 90, 220, null, 'Clear / transparent acrylic. Custom shapes on request.'),
@@ -366,15 +358,9 @@ window.SIZE_CHART = [
     make('acr-glitter', 'Glitter Acrylic', 'acrylic', S.acrylic, 4, 150, 320, null, 'Glitter, confetti and sparkle acrylic for fashion.'),
     make('acr-frosted', 'Frosted Acrylic', 'acrylic', S.acrylic, 4, 120, 270, null, 'Frosted / satin acrylic with a soft face.'),
     make('acr-mirror', 'Mirror Acrylic', 'acrylic', S.acrylic, 0, 180, 360, null, 'Mirror and holographic acrylic.'),
-    make('acr-laser', 'Laser Cut Acrylic', 'acrylic', S.acrylic, 4, 160, 340, null, 'Laser-cut acrylic shapes beyond the round stock.'),
-    make('acr-custom', 'Custom Acrylic', 'acrylic', S.acrylic, 4, 200, 420, null, 'Custom colour, shape and size — including 70L and 80L.'),
 
     make('wd-natural', 'Natural Wood', 'wood', S.wood, 2, 140, 280, null, 'Unfinished and natural-grain wood buttons.'),
-    make('wd-painted', 'Painted Wood', 'wood', S.wood, 2, 150, 300, null, 'Painted wood in solids and multicolour.'),
-    make('wd-printed', 'Printed Wood', 'wood', S.wood, 2, 170, 330, null, 'Printed grain and motif on wood discs.'),
     make('wd-engraved', 'Laser Engraved Wood', 'wood', S.wood, 2, 200, 380, null, 'Laser-engraved logos and patterns on wood.'),
-    make('wd-burnt', 'Burnt / Pyrography Wood', 'wood', S.wood, 2, 210, 400, null, 'Burnt and rustic pyrography finishes.'),
-    make('wd-bamboo', 'Bamboo Buttons', 'wood', S.wood, 2, 160, 320, null, 'Bamboo — light, natural and laser-ready.'),
     make('wd-coconut', 'Coconut Shell Buttons', 'wood', S.wood, 2, 180, 360, null, 'Coconut shell with natural bark and grain.'),
     make('wd-custom', 'Custom Wooden Buttons', 'wood', S.wood, 2, 230, 450, null, 'Custom wood species, paint and size.'),
 
