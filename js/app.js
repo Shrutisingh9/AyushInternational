@@ -16,7 +16,14 @@
   let wishlist = loadJSON('ayush_wishlist', []);
   let ratings = loadJSON('ayush_ratings', {});
   let myRatings = loadJSON('ayush_my_ratings', {});
+
   let activeCategory = 'all';
+  (function readCategoryFromURL() {
+    const urlCat = new URLSearchParams(window.location.search).get('cat');
+    if (urlCat && CATEGORIES.some(function (c) { return c.id === urlCat; })) {
+      activeCategory = urlCat;
+    }
+  })();
 
   function saveCart() { localStorage.setItem('ayush_cart', JSON.stringify(cart)); }
   function saveWishlist() { localStorage.setItem('ayush_wishlist', JSON.stringify(wishlist)); }
@@ -336,9 +343,9 @@
       + '<div class="detail-actions">'
       + '<button class="btn btn-brass" data-action="cart" data-id="' + p.id + '">' + (inCart ? 'Add another' : 'Add to cart') + '</button>'
       + '<button class="btn btn-outline" data-action="wish" data-id="' + p.id + '" aria-pressed="' + inWishlist + '">' + (inWishlist ? 'Saved to wishlist' : 'Add to wishlist') + '</button>';
-      + '</div>'
-      + '<p class="hint-note">Indicative rate in INR, per 100 pieces. Confirm line, colour and bulk rate when you order.</p>'
-      + '</div></div>';
+      // + '</div>'
+      // + '<p class="hint-note">Indicative rate in INR, per 100 pieces. Confirm line, colour and bulk rate when you order.</p>'
+      // + '</div></div>';
     root.querySelectorAll('img[data-fallback]').forEach(function (img) {
       bindImageFallback(img);
     });
@@ -554,7 +561,7 @@
 
     function startAuto() {
       stopAuto();
-      timer = setInterval(function () { goTo(index + 1); }, 1500);
+      timer = setInterval(function () { goTo(index + 1); }, 3500);
     }
     function stopAuto() {
       if (timer) clearInterval(timer);
